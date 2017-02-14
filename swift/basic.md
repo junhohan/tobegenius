@@ -16,7 +16,6 @@ Optional로 선언하는 방법
 ```
   var number: Optional<Int>  
   number = nil
-
 ```
 
 또는,
@@ -32,12 +31,56 @@ Optional로 선언하는 방법
   var number: Int
   number =  nil 
   
-  **error: nil cannot be assigned to type 'Int'**
-  **n2 =  nil**
-
+  error: nil cannot be assigned to type 'Int'
+  n2 =  nil
 ```
 
+Optional 타입의 변수에 값을 넣으면 "이 값은 ```wrapped``` 되어 있다"고 표현한다. 이는 일반적인 방법으로는 변수에 접근할 수 없고, 접근하려면 변수를 ```unwrapped``` 시켜야 한다는 것으로 이해하면 된다.
 
+아래 코드는 에러가 발생할 수 있다.
 
+```
+  var number: Int? = 10
+  var temp = number
+```
+
+```number``` 강제로 unwrapped 하는 방법은 ```!```를 붙이면 된다.
+
+```
+  var number: Int? = 10
+  var temp = number!
+```
+
+하지만, 이 방법은 number가 ```nil```이 절대 아닐 경우에만 안전하다.
+가장 좋은 방법은 ```optional binding```이라 불리는 방법이고, 아래와 같이 구현하면 된다.
+
+```
+  var number: Int? = 10
+  if let p = number {
+      print("The unwrapped value is\(p)")
+  } else {
+      print("There is no value")
+  }
  
-The fact that a runtime error will result from setting a non optional variable to nil and that nil can only be set to a variable declared with an optional data type might be considered a first line of defense (of two) in avoiding this kind of error.
+```
+
+위의 코드는 if문에서 wrapped value인 ```number```의 실제 값을 ```p```에 대입해보고, 성공하면 첫 번째 구문을, 실패(no value, nil)하면 두 번째 구문을 실행하게 된다.
+
+물론 아래처럼 ```nil```을 체크하는 방법으로 구현할 수 있다.
+
+```
+  var number2:Int? = 10
+  if number2 != nil {
+    print("The value is \(number2!)")
+  } else {
+    print("m has no value")
+  }
+```
+
+값이 있다고 해서 ```!```로 강제 unwrapped을 하고 있는 것을 주목하자. 개발자가 ```!```를 깜빡하는 순간 에러를 발생 시킬 수 있기 때문에 이 방법보다는 ```optional binding```을 사용하는 것이 좋다.
+
+
+
+
+
+
