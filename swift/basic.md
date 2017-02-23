@@ -15,21 +15,21 @@ Swift는 ```optional values``` 또는 ```optionals```라는 기능을 제공하�
 
 Optional로 선언하는 방법
 
-```
+```Swift
   var number: Optional<Int>  
   number = nil
 ```
 
 또는,
 
-```
+```Swift
   var number: Int?
   number = nil
 ```
 
 ```number```는 optional value이므로 ```nil```을 가질 수 있다. 만약 일반 변수로 선언하고 ```nil```로 바꾸려하면 에러가 발생한다.
 
-```
+```Swift
   var number: Int
   number =  nil 
   
@@ -41,14 +41,14 @@ Optional 타입의 변수에 값을 넣으면 "이 값은 ```wrapped``` 되어 �
 
 아래 코드는 에러가 발생할 수 있다.
 
-```
+```Swift
   var number: Int? = 10
   var temp = number
 ```
 
 ```number``` 강제로 unwrapped 하는 방법은 ```!```를 붙이면 된다.
 
-```
+```Swift
   var number: Int? = 10
   var temp = number!
 ```
@@ -56,7 +56,7 @@ Optional 타입의 변수에 값을 넣으면 "이 값은 ```wrapped``` 되어 �
 하지만, 이 방법은 number가 ```nil```이 절대 아닐 경우에만 안전하다.
 가장 좋은 방법은 ```optional binding```이라 불리는 방법이고, 아래와 같이 구현하면 된다.
 
-```
+```Swift
   var number: Int? = 10
   if let p = number {
       print("The unwrapped value is\(p)")
@@ -70,7 +70,7 @@ Optional 타입의 변수에 값을 넣으면 "이 값은 ```wrapped``` 되어 �
 
 물론 아래처럼 ```nil```을 체크하는 방법으로 구현할 수 있다.
 
-```
+```Swift
   var number2:Int? = 10
   if number2 != nil {
     print("The value is \(number2!)")
@@ -85,9 +85,64 @@ Optional 타입의 변수에 값을 넣으면 "이 값은 ```wrapped``` 되어 �
 
 ### Closures
 
+Swift의 클로저는 아래와 같이 생겼다.
+
 ```Swift
-	{ ([parameter]) -> [return type] in
+	{ 
+		([parameter]) -> [return type] in
 		statements
 	}
 ```
+
+```Swift
+	var animals = ["dog", "cat", "horse", "cow", "zebra"]
+	print(animals)
+```
+
+> **출력: ["dog", "cat", "horse", "cow", "zebra"]**
+
+array가 갖고 있는 sort()를 호출해보자.
+
+```Swift
+	var animals = ["dog", "cat", "horse", "cow", "zebra"]
+	animals.sort()
+	print(animals)
+```
+
+> **출력: ["cat", "cow", "dog", "horse", "zebra"]**
+
+아주 간단하게 오름차순 정렬이 되었다.
+
+이제, 내림차순 정렬을 하자.
+다른 언어와 비슷하게, 정렬에 사용할 함수(backward(...))를 정의하고 sort()로 넘겨준다.
+
+***"sort 함수야 정렬할 때, 이 함수를 사용해줘!"라고 이해하면 된다.***
+
+```Swift
+	var animals = ["dog", "cat", "horse", "cow", "zebra"]
+	func backward(_ s1: String, _ s2: String) -> Bool {
+	  return s1 > s2
+	}
+	animals.sort(by: backward)
+	print(animals)
+```
+
+> **출력: ["zebra", "horse", "dog", "cow", "cat"]**
+
+backward()를 이곳저곳에서 사용하면 위와 같이 하나 정의해두고 써도 되지만 그닥 중요하지 않거나
+간단하게 한 곳에서 사용한다면 클로저를 사용하는게 편하다.
+
+```Swift
+	var animals = ["dog", "cat", "horse", "cow", "zebra"]
+	// 클로저는 by: 뒤에 '{'부터 시작
+	// 그 다음 '('에서 ')'까지가 parameter
+	// '-> Bool' 이므로 return type은 Bool
+	// 'in' 뒤에 나오는 구문이 이 클로저가 할 일 (역순정렬을 위한 비교문)
+	animals.sort(by: {(_ s1: String, _ s2: String) -> Bool in
+	  return s1 > s2
+	})
+	print(animals)
+```
+
+> **출력: ["zebra", "horse", "dog", "cow", "cat"]**
 
