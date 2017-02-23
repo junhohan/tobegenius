@@ -1,5 +1,7 @@
 ### Optional Values
 
+출처 : [Understanding Optional Values in Swift - Craig A. Will](http://swiftjester.org/papers/understanding-optional-values-in-swift.htm)
+
 개발할 때, 어떤 변수에 값이 잘 들어있다고 기대했다가 실제로는 값이 들어있지 않았을 때 에러가 발생한다.
 
 iOS나 MAC에서 "값이 없음"을 ```nil```로 표현한다. 예를 들면, ```toInt()``` 함수는 "1234"가 아닌, "abcd"가 주어지면 ```nil```을 반환한다.
@@ -81,6 +83,11 @@ Optional 타입의 변수에 값을 넣으면 "이 값은 ```wrapped``` 되어 �
 
 
 
+### Closures
 
-
+```Swift
+	{ ([parameter]) -> [return type] in
+		statements
+	}
+```
 

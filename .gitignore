@@ -1,29 +1,23 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Add some files or directories to ignore from Git
 
-# Precompiled Headers
-*.gch
-*.pch
+# build directory
+build/
+lib/
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# OS generated files #
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
 
-# Fortran module files
-*.mod
-*.smod
+# CMake
+.sconsign.dblite
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+.o
+xcuserdata
 
-# Executables
-*.exe
-*.out
-*.app
+*.swp

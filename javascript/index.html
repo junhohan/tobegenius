@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0" charset="utf-8">
+
+  </head>
+  <body>
+    <div id="added"></div>
+    <div id="globalExternal">NULL</div>
+    <div id="globalInternal">NULL</div>
+
+    <script src="js/external.js" language="Javascript" type="text/javascript"></script>
+    <script>
+      // External File Test
+      var initValue = 4;
+      var addedValue = addFive(initValue);
+      document.getElementById("added").innerHTML = "Result: " + addedValue;
+
+      // Global Value Test
+      var globalInternal = "I am a global value in html file";
+      document.getElementById("globalExternal").innerHTML = globalExternal;
+      document.getElementById("globalInternal").innerHTML = getInternalValue();
+    </script>
+
+  </body>
+</html>
