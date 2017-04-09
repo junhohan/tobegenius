@@ -2,11 +2,11 @@
 
 ## Languages
 ### Swift
-* [About Foundation](https://github.com/junhohan/tobegenius/blob/master/swift/foundation.md)
-* [base](https://github.com/junhohan/tobegenius/swift/basic.md)
-* [About cocoa](https://github.com/junhohan/tobegenius/blob/master/swift/cocoa.md)
-* [Strings and Characters](https://github.com/junhohan/tobegenius/blob/master/swift/strings_and_characters.md)
-* [Collections](https://github.com/junhohan/tobegenius/blob/master/swift/Collections.md)
+* [About Foundation](https://github.com/junhohan/tobegenius/blob/master/languages/swift/foundation.md)
+* [base](https://github.com/junhohan/tobegenius/blob/master/languages/swift/swift/basic.md)
+* [About cocoa](https://github.com/junhohan/tobegenius/blob/master/languages/swift/cocoa.md)
+* [Strings and Characters](https://github.com/junhohan/tobegenius/blob/master/languages/swift/strings_and_characters.md)
+* [Collections](https://github.com/junhohan/tobegenius/blob/master/languages/swift/Collections.md)
 
 ### Javascript
 
