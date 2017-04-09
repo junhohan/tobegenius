@@ -1,4 +1,8 @@
-### Optional Values
+# Type Casting
+Swift에서 형변환은 `is` 또는 `as` 연산자를 사용한다. 이 두 개의 연산자로 변수의 형을 체크하거나, 다른 형으로 변환하는 일을 쉽게 할 수 있다. 
+
+
+# Optional Values
 
 출처 : [Understanding Optional Values in Swift - Craig A. Will](http://swiftjester.org/papers/understanding-optional-values-in-swift.htm)
 
@@ -83,7 +87,7 @@ Optional 타입의 변수에 값을 넣으면 "이 값은 ```wrapped``` 되어 �
 
 
 
-### Closures
+# Closures
 
 Swift의 클로저는 아래와 같이 생겼다.
 
@@ -164,16 +168,26 @@ parameter type과 return type을 생략했다.
 이것도 돼고,
 
 ```Swift
-	animals.sorted(by: {
-  		$0 > $1
-	})
+  animals.sorted(by: {
+    $0 > $1
+  })
 ```
 
 심지어 이것도 된다.
 
 ```Swift
-	animals.sorted(by: >)
+  animals.sorted(by: >)
 ```
 
-이걸 Swift의 장점이라고 봐야하는지 모르겠다. >.<
+#### Closure 정의
+typealias로 지저분한(?) 클로저를 Type으로 정의한다.
 
+```Swift
+  public typealias MyClosure = (String, Int) -> Void
+```
+
+이제 MyClosure로 변수를 만들 수 있다.
+
+```Swift
+  var myClosure: MyClosure
+```
