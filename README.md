@@ -3,7 +3,7 @@
 ## Languages
 ### Swift
 * [About Foundation](https://github.com/junhohan/tobegenius/blob/master/languages/swift/foundation.md)
-* [base](https://github.com/junhohan/tobegenius/blob/master/languages/swift/swift/basic.md)
+* [base](https://github.com/junhohan/tobegenius/blob/master/languages/swift/basic.md)
 * [About cocoa](https://github.com/junhohan/tobegenius/blob/master/languages/swift/cocoa.md)
 * [Strings and Characters](https://github.com/junhohan/tobegenius/blob/master/languages/swift/strings_and_characters.md)
 * [Collections](https://github.com/junhohan/tobegenius/blob/master/languages/swift/Collections.md)
