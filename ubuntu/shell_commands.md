@@ -45,3 +45,52 @@ $ date && sudo ntpdate ntp.ubuntu.com && date
 ```
 
 [참고페이지](http://system-monitoring.readthedocs.io/en/latest/log.html)
+
+### Service
+
+#### Service 조회하기
+
+```Bash
+  $ sudo service --status-all
+  [ + ]  friendly-recovery
+  [ - ]  grub-common
+  [ ? ]  irqbalance
+  [ + ]  kerneloops
+  [ ? ]  killprocs
+  [ ? ]  kmod
+  [ ? ]  lightdm
+  [ + ]  mongodb
+  [ - ]  mosquitto
+```
+
+```Bash
+  $ sudo service mongodb status
+  mongodb start/running, process 17146
+```
+
+목록 표기 설명  
+
+* [ + ] : Running
+* [ - ] : Stopped
+* [ ? ] : Managed by `Upstart` or Cannot be determined for some reason.
+
+
+> ***Upstart란?***  
+> 우분투에서 제공하는 특별한 서비스 관리 툴
+> 부팅할 때 항상 실행해야 하고, 오류로 종료되어도 자동으로 다시 시작해야 하며 다른 서비스와의 Dependancy를 설정해야 할 때는 `Upstart`로 구동하는 것이 좋다.  
+> 자세한 설명 및 설정 방법 : [Link](http://blog.sapzil.org/2014/08/12/upstart/)
+
+#### Upstart 서비스 상태 조회
+
+```Bash
+  $ sudo initctl list
+  avahi-daemon start/running, process 704
+  gitlab-runsvdir start/running, process 1089
+  mountnfs-bootclean.sh start/running
+  tty4 start/running, process 1091
+  whoopsie start/running, process 1316
+  ...
+```
+
+
+

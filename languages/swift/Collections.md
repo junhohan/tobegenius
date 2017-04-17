@@ -31,8 +31,11 @@ Mutuability의 뜻은 '변하기 쉬움'이다. Array나 Set이나 Dictionary를
 두 방법은 기능적으로 완전히 동일하다. 하지만, 두 번째 방법을 권한다.
 `[Int]`에 적은 Int 때문에 이 배열에는 Int Type의 아이템만 담을 수 있다.
 
+## 비어있는 배열 생성하기
 ```Swift 
   var myInts = [Int]()
+  myInts.append(0)
+  myInts.append(1)
   myInts = []
 ```
 
@@ -58,11 +61,7 @@ Mutuability의 뜻은 '변하기 쉬움'이다. Array나 Set이나 Dictionary를
 
 ## 배열 리터럴(array literal)로 생성하기
 
-배열 리터럴의 생김새 
-
-```Swift
-  [value1, value2, value3]
-```
+  > 배열 리터럴의 표기법 : [value1, value2, value3]
 
 아래 코드는 "문자열을 담는 배열 colorList를 생성하는데, 초기값으로 "Red", "Green", "Blue" 3개를 넣어둔다"라는 의미다.
 
@@ -70,8 +69,113 @@ Mutuability의 뜻은 '변하기 쉬움'이다. Array나 Set이나 Dictionary를
   var colorList: [String] = ["Red", "Green", "Blue"]
 ```
 
+더 간단한 방법으로도 구현할 수 있다.
 
+```Swift
+  var colorList = ["Red", "Green", "Blue"]
+  var myScore = [9.0, 10, 8, 7]
+  var newScore: Double = 9
+  myScore.append(newScore)
+```
 
+Swift의 타입추론(Type Inference) 덕에 배열의 타입을 명시하지 않아도 colorList에 담을 수 있는 아이템의 형은 String으로, myScore은 Double로 지정된다. 
+
+* 참고 : '추론'한다는 것은 집어넣으려는 값의 형태를 보고, 컴파일러가 알아서 변수의 타입을 알아내는 기능을 갖고 있다는 것이다.  
+쉽게 말해, C에서는 사람이 `int num = 0`와 같이 "num는 `int`형을 담을 수 있다"고 알려줬었다. 하지만 Swift에서는 변수의 선언을 변수는 `var` , 상수는 `let`으로 통일하고 어떤 값을 넣으면 컴파일러가 '어떤 값'이 무슨 타입인지 알아내고 변수의 타입을 알라서 지정한다 생각하면 된다.
+
+* 참고 : 아이템 중, 한 개라도 Double형(9.0)이 존재하면 myScore는 Double형을 담을 수 있는 배열로 추론된다. 모두 정수형이면 Int로 추론된다.
+
+## 배열에 접근하고 수정하기
+
+배열의 아이템 개수
+
+```Swift
+  print("Count = \(colorList.count)")
+  // Output : Count = 3
+```
+
+배열이 비어있는지 확인
+
+```Swift
+  var users = [String]()
+  if users.isEmpty {
+    print("You have no users!!")
+  }
+```
+
+배열에 아이템 추가하기
+```Swift
+  users.append("Lily Ellen")
+  if users.isEmpty == false {
+    print("Congrat! You have some users!!")
+  }
+```
+
+`+=` 연산자로도 아이템을 추가할 수 있다.
+
+```Swift
+  users += ["Amy Ree"]
+  users += ["Faramore", "Adele"]
+  if users.count > 1 {
+    print("Wow! You have so many users!!")
+  }
+```
+
+값에 접근하는 것은 여러 언어와 다를바 없다.
+
+```Swift
+  var firstUser = users[0]  // "Lily Ellen"
+```
+
+값 변경도 큰 차이 없다.
+
+```Swift
+  users[0] = "Lily Allen"
+  print("You fixed typo, from Ellen to Allen")
+```
+
+Subscript Syntax를 이용해서 여러 요소를 한 번에 수정할 수 있다.
+
+```Swift
+  users[1...2] = ["Amy Lee", "Paramore"]
+  print("You fixed two typo of index from 1 to 2")
+  // users = ["Lily Allen", "Amy Lee", "Paramore", "Adele"]
+```
+
+Subscript Syntax로는 현재 갖고 있는 아이템들만 수정할 수 있고, 새로운 아이템을 추가할 수는 없다.
+
+```Swift
+  users[5...6] = ["Amy Lee", "Paramore"]  // Compile Error
+```
+
+지정한 인덱스에 새로운 아이템 추가하기
+
+```Swift
+  users.insert("Gwen Stefani", at: 1)
+  // users = ["Lily Allen", "Gwen Stefani", "Amy Lee", "Paramore", "Adele"]
+```
+
+아이템 삭제하기
+
+```Swift
+  var adele = users.remove(at: 4)
+```
+위 코드를 실행하면,  
+
+* 4번째 인덱스의 "adele" 삭제되고,
+* 이제 users의 아이템의 개수는 4개가 되며,
+* 삭제된 "adele"은 return 되어 `var adele` 변수에 저장된다.
+
+마지막 아이템 삭제하기
+`removeLast()`를 사용하면, 삭제하기 전에 배열의 마지막 개수를 체크할 필요가 없고, `remove()`와 동일하게 삭제한 아이템을 반환하기 때문에 잘 이용하면 `stack`처럼 사용할 수 있다.
+
+```Swift
+  var paramore = users.removeLast()
+```
+
+```Swift
+
+```
 
 
 
