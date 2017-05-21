@@ -1,5 +1,5 @@
 # Shell Commands
-### crontab
+## crontab (on Ubuntu, Rasbian)
 crontab 편집하기  
 
 ```BASH
@@ -34,7 +34,7 @@ $ sudo crontab -e
 /etc/cron.weekly/
 ```
 
-### 시간 동기화
+## 시간 동기화 (on Ubuntu)
 ```
 $ date && sudo ntpdate ntp.ubuntu.com && date
 ```
@@ -46,7 +46,7 @@ $ date && sudo ntpdate ntp.ubuntu.com && date
 
 [참고페이지](http://system-monitoring.readthedocs.io/en/latest/log.html)
 
-### Service
+## Service (on Ubuntu)
 
 #### Service 조회하기
 
@@ -65,7 +65,7 @@ $ date && sudo ntpdate ntp.ubuntu.com && date
 
 ```Bash
   $ sudo service mongodb status
-  mongodb start/running, process 17146
+  mongodb start/₩running, process 17146
 ```
 
 목록 표기 설명  
@@ -75,10 +75,62 @@ $ date && sudo ntpdate ntp.ubuntu.com && date
 * [ ? ] : Managed by `Upstart` or Cannot be determined for some reason.
 
 
+## Upstart (on Ubuntu)
+
 > ***Upstart란?***  
-> 우분투에서 제공하는 특별한 서비스 관리 툴
-> 부팅할 때 항상 실행해야 하고, 오류로 종료되어도 자동으로 다시 시작해야 하며 다른 서비스와의 Dependancy를 설정해야 할 때는 `Upstart`로 구동하는 것이 좋다.  
-> 자세한 설명 및 설정 방법 : [Link](http://blog.sapzil.org/2014/08/12/upstart/)
+> 우분투에서 제공하는 특별한 서비스 관리 툴  
+> 부팅할 때 항상 실행해야 하고, 오류로 종료되어도 자동으로 다시 시작해야 하며 다른 서비스와의Dependancy를 설정해야 할 때는 `Upstart`로 구동하는 것이 좋다.  
+> Ubuntu 14.04에는 Systemd를 실행할 수 없어서 Upstart를 사용해야 한다.  
+> Ubuntu 15.04부터 새로운 Init 시스템인 Systemd가 디폴트가 되었다.   
+> [Systemd For Upstart User](https://wiki.ubuntu.com/SystemdForUpstartUsers)  
+> [Understanding Systemd](http://blu.org/meetings/2016/03/BLU-20160315-systemd.pdf)    
+> 자세한 설명 및 설정 방법 : [Link](http://blog.sapzil.org/2014/08/12/upstart/)  
+
+#### Config 파일 작성하기
+
+```Bash
+  description "MY APP"
+  start on net-device-up
+  start on started OTHER_APP and ANOTHER_APP
+  start on runlevel [2345]
+  stop on runlevel [06]
+  respawn
+  respawn limit 10 5
+  chdir /home/my/app/
+  exec /home/my/app/my_app > /var/log/my_app/my_app.log 2>&1
+```
+
+* `start on net-device-up` : 네트워크가 연결된 후 실행하도록 설정
+* `start on started OTHER_APP` : 다른 실행파일을 실행한 후에 my_app을 실행하도록 설정. 뒤에 `and ANOTHER_APP`을 붙여서 의존성을 추가로 부여할 수 있음
+* `run level` : 부팅될 때 실행하고, 종료될 때 죽어라. [참고 - upstart.ubuntu.com](http://upstart.ubuntu.com/cookbook/#runlevels)
+* `respawn` : 프로세스가 죽으면 재시작
+* `respawn limit 10 5` : 재시작하는 회수 제한. 10번 재실행을 하고 각각의 재시도 간격은 5초다. 만약 재시작의 제한을 두지 않으려면 `respawn limit unlimited`으로 설정한다. `respawn`과 별도로 작성해야 한다. 
+* `exec` : 파일을 실행. `exec PATH_TO_RUN_MY_APP > PATH_TO_LOG_FILE 2>&1` 형식으로 적으면 된다.
+
+#### 설정 Reload
+
+```Bash
+  $ sudo initctl reload-configuration
+```
+
+#### Start, Stop, Restart
+
+```Bash
+  $ sudo start my_app
+  my_app start/running, process 4270
+```
+
+```Bash
+  $ sudo stop my_app
+  my_app stop/waiting
+```
+
+```Bash
+  $ sudo restart my_app
+  my_app start/running, process 11106
+```
+
+[참고] restart 또는 stop을 실행할 때, "Unknown instance:" 라는 메시지가 출력되면 ***"앱이 실행되고 있지 않아서 stop할게 없어요!"*** 라는 의미다. start가 되지 않을 때는 `/var/init/my_app.conf` 파일에 문제가 있거나, 파일을 실행할 때 오류가 발생하거나 둘 중 하나다.
 
 #### Upstart 서비스 상태 조회
 
@@ -90,6 +142,25 @@ $ date && sudo ntpdate ntp.ubuntu.com && date
   tty4 start/running, process 1091
   whoopsie start/running, process 1316
   ...
+```
+
+
+## sed 명령어
+#### 모든 파일의 모든 문자열 Replace (on macOS)
+
+sed options  
+
+* [--exclude-from] : 내 스크립트 파일은 제외하고 검색(grep)
+* ['s/OLD/NEW/g'] : 's'는 substitute(대리, 대체자), 'g'는 global을 의미한다. 풀어서 설명하면 "파일 내 모든(g) "OLD"를 "NEW"로 변경(s)해라"다. 
+* [-i ""] : "원본파일(in-place)에서 변경한 후 저장해라"는 의미이고, "" 안에는 필터링할 확장자(e.g cc, cpp etc.)를 표기할 수 있다. ""로 빈 칸(zero-length)을 넣으면 백업파일도 만들지 않고 변경해버린다. 사용하기 전 반드시 주의가 필요하다.
+
+> 만약, 정규식을 ['s/OLD/NEW/]와 같이 g를 제거하면, 문장에서 첫 번째로 매칭되는 단어만 변경한다. 
+
+[myshell.sh]
+
+```Bash
+  #!/bin/bash
+  grep -rl --exclude-from=myshell.sh "OLD" | xargs sed -i "" -e 's/OLD/NEW/g'
 ```
 
 
