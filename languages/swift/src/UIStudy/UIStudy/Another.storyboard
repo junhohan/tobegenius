@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
+    </dependencies>
+    <scenes>
+        <!--Another View-->
+        <scene sceneID="emM-Nu-rme">
+            <objects>
+                <viewController title="Another View" storyboardIdentifier="another" id="RiJ-wb-Mrs" customClass="AnotherViewController" customModule="UIStudy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="gTW-Od-tYe">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <containerView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bca-ls-WyX">
+                                <rect key="frame" x="113" y="75" width="225" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <connections>
+                                    <segue destination="lw2-ZX-Z0m" kind="embed" id="yD6-yb-fhp"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="22Z-Rf-e1s" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-72" y="89"/>
+        </scene>
+        <!--Another View Controller-->
+        <scene sceneID="85e-ya-jvS">
+            <objects>
+                <viewController id="lw2-ZX-Z0m" customClass="AnotherViewController" customModule="UIStudy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="EWs-9V-ARz">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="263"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wlc-xx-GfI">
+                                <rect key="frame" x="163" y="123" width="124" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Another Storyboard" id="M8K-1T-T4Q">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K9U-dL-u6X">
+                                <rect key="frame" x="202" y="20" width="46" height="18"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m7x-ZU-JSR">
+                                        <rect key="frame" x="0.0" y="-1" width="46" height="19"/>
+                                        <buttonCell key="cell" type="roundRect" title="Close" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Uwb-7V-bsK">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="cellTitle"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="onClickClose:" target="lw2-ZX-Z0m" id="qbg-D0-iAr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="K9U-dL-u6X" secondAttribute="bottom" constant="20" id="5lD-EY-xUY"/>
+                            <constraint firstItem="Wlc-xx-GfI" firstAttribute="centerY" secondItem="EWs-9V-ARz" secondAttribute="centerY" id="8lP-U4-wej"/>
+                            <constraint firstItem="K9U-dL-u6X" firstAttribute="centerX" secondItem="EWs-9V-ARz" secondAttribute="centerX" id="J8x-b2-7Nf"/>
+                            <constraint firstItem="Wlc-xx-GfI" firstAttribute="centerX" secondItem="EWs-9V-ARz" secondAttribute="centerX" id="X1D-PC-u7e"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="A2R-2M-g2O" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-72" y="517.5"/>
+        </scene>
+    </scenes>
+</document>
