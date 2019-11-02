@@ -21,4 +21,5 @@
 * [System Logs](https://github.com/junhohan/tobegenius/blob/master/ubuntu/system_logs.md)
 
 ## Tools
+* [git tips](https://github.com/junhohan/tobegenius/blob/master/tools/git_tips.md)
 * [xcode](https://github.com/junhohan/tobegenius/blob/master/tools/xcode.md)
