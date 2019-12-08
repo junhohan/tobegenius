@@ -1,3 +1,19 @@
+# Github Tips
+
+### Octotree 
+- Chrome App
+- Repository에 들어가면 왼쪽에 버튼이 활성
+- 트리구조의 소스 리스트를 제공
+- 소스검색 및 리뷰가 용이함
+- Pro 버전은 구독 서비스, 약3만원/year)
+
+![octotree](./images/octotree.png)
+
+### Shortcuts
+- Repository에서 [t.T]를 누르면 파일 검색이 가능
+
+![github shortcut T](./images/github_shortcut_t.png)
+
 # Git Tips
 
 ### Install Git
