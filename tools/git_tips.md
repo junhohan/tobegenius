@@ -14,6 +14,19 @@
 
 ![github shortcut T](./images/github_shortcut_t.png)
 
+### 웹에서 History 쉽게 보기
+
+- URL에서 ***github-history.netlify.com***으로 변경하여 히스토리를 쉽게 볼 수 있는 페이지로 이동
+
+From 
+```
+https://github.com/SOMEONE/FOLDER/my_file.md
+```
+To
+```
+https://github-history.netlify.com/SOMEONE/FOLDER/my_file.md
+```
+
 # Git Tips
 
 ### Install Git
