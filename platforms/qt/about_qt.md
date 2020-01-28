@@ -1,6 +1,6 @@
 # About QT
 
-참고 : https://wiki.qt.io/About_Qt
+참고 : [About Qt](https://wiki.qt.io/About_Qt)
 
 
 
@@ -12,7 +12,7 @@
 
 ### Surpported Platforms
 
-- Linux, OSX, Windows
+- Linux, macOS, Windows
 - VxWorks
 - QNX
 - Android, iOS, BlackBerry
@@ -72,6 +72,31 @@
   - 다른 언어 바인딩을 위한 자세한 사항은 [Category:LanguageBindings](https://wiki.qt.io/Category:LanguageBindings)을 참고한다.
 
 
+
+
+
+### Qt Widget & Qt Quick
+
+
+
+##### Qt Widget
+
+- Qt Widget Module은 기존의 데스크탑 스타일의 UI를 구성할 때 필요한 **UI 요소**들을 제공한다.
+  - UI 요소(Widget) : 레이블, 버튼, 라디오버튼, 시간 또는 날짜 선택, 프로그레스바 등
+- QWidget 클래스는 화면을 랜더링하고 사용자 이벤트를 처리하는 Qt의 모든 UI 클래스는 QWidget 클래스를 상속한다.
+- 참고 : [Qt Widget](https://doc.qt.io/qt-5/qtwidgets-index.html)
+
+
+
+##### Qt Quick
+
+- Qt Quick Module은 QML 어플리케이션을 작성하기 위한 **표준 라이브러리**다.
+- [Qt QML](https://doc.qt.io/qt-5/qtqml-index.html) module이 QML 엔진과 언어를 다루는 환경을 제공하고 Qt Quick Module은 QML로 UI를 구성하기 위해 필요한 전반의 기본적인 타입을 제공한다. 예를 들면, 캔버스를 제공하고, 컴포넌트 작성 및 애니메이션효과, 사용자 입력 수신, 데이터 모델 및 뷰 작성 그리고 지연된 오브젝트 인스턴스화를 위한 타입 또한 제공한다.
+
+- Qt Quick 모듈은 두가지 API를 제공한다.
+  - QML 언어로 사용자 인터페이스를 작성하기위한 QML 타입을 제공하는 QML API
+  - C++ 코드로 QML 애플리케이션을 확장하기위한 C ++ API
+- 참고 : [Qt Quick](https://doc.qt.io/qt-5/qtquick-index.html)
 
 
 
