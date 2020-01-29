@@ -1,6 +1,7 @@
 # The 1st Project : Notepad
 
 - 참고 : [Getting Started Programming with Qt Widgets](https://doc.qt.io/qt-5/qtwidgets-tutorials-notepad-example.html#using-qt-designer)
+-  Notepad 전체 소스(공식사이트) : [notepad](https://code.qt.io/cgit/qt/qtbase.git/tree/examples/widgets/tutorials/notepad?h=5.14)
 
 ### Create a project
 
@@ -114,6 +115,7 @@ Notepad::Notepad(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Notepad) {
     ui->setupUi(this);
+    this->setCentralWidget(ui->textEdit);
     this->menuBar()->setNativeMenuBar(false);
 }
 Notepad::~Notepad() {
@@ -123,7 +125,52 @@ Notepad::~Notepad() {
 ```
 
 - masOS에서 메뉴를 추가해도 화면에 나타나지 않는 문제가 있다.
-  - `this->menuBar()->setNativeMenuBar(false);`를 추가해서 네이티브 메뉴바를 비활성시키면 Qt메뉴가 활성화된다.
+  - `this->menuBar()->setNativeMenuBar(false);`
+    -  네이티브 메뉴바를 비활성시키면 Qt메뉴가 활성화된다.
+    - 이 코드가 없으면 macOS 스타일로 모니터 최상단의 메뉴에 나타난다.
+  - `this->setCentralWidget(ui->textEdit);`
+    - Text Edit가 윈도우 전체를 차지하도록 설정한다.
+
+
+
+### Connect UI Elements to Codes
+
+##### 메뉴추가
+
+![](img/add_menu.png)
+
+
+
+##### UI요소를 코드와 연결하기 : Trigger
+
+- Qt Designer 하단에 Action Editor가 있다.
+- Open을 클릭했을 때, 어떤 함수가 호출되도록 한다.
+  - G**o to Slot > Triggered**를 선택하면 코드에 자동으로 함수가 추가된다.
+
+![](img/connect_ui.png)
+
+
+
+```C++
+void Notepad::on_actionOpen_triggered() {
+    qDebug("on_actionOpen_triggered");
+}
+
+void Notepad::on_actionSave_triggered() {
+    qDebug( "on_actionSave_triggered");
+}
+```
+
+- 실행하고 메뉴를 클릭하면, 디버그 메시지가 출력된다.
+
+- `qDebug("...");`
+  - Qt에서는 printf 대신 `qDebug`함수를 사용한다.
+
+
+
+
+
+
 
 
 
