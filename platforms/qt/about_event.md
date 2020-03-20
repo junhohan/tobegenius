@@ -45,7 +45,7 @@
 
   
 
-이벤트에 대한 좀 더 깊이 있는 내용은  [QCoreApplication::notify](https://doc.qt.io/archives/qt-4.8/qcoreapplication.html#notify)() 와 [Another Look at Events](http://doc.qt.digia.com/qq/qq11-events.html)에서 참고할 수 있다.
+이벤트에 대한 좀 더 깊이 있는 내용은  [QCoreApplication::notify](https://doc.qt.io/archives/qt-4.8/qcoreapplication.html#notify)() 와 [Another Look at Events](https://doc.qt.io/archives/qq/qq11-events.html)에서 참고할 수 있다.
 
 
 
