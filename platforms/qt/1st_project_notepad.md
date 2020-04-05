@@ -3,7 +3,9 @@
 - 참고 : [Getting Started Programming with Qt Widgets](https://doc.qt.io/qt-5/qtwidgets-tutorials-notepad-example.html#using-qt-designer)
 -  Notepad 전체 소스(공식사이트) : [notepad](https://code.qt.io/cgit/qt/qtbase.git/tree/examples/widgets/tutorials/notepad?h=5.14)
 
-### Create a project
+
+
+## Create a project
 
 - **File** > **New File or Project** > **Applications** > **Qt Widgets Application** > **Choose**
 - **Class Information** 창에서, 클래스명에 **Notepad**를  베이스 클래스는 **QMainWindow을 선택한다.
@@ -11,7 +13,7 @@
 
 
 
-### Source Files
+## Source Files
 
 > notepad.pro - 프로젝트 파일
 >
@@ -25,7 +27,7 @@
 
 
 
-### Main Source
+## Main Source
 
 : main.cpp
 
@@ -61,7 +63,7 @@ int main(int argc, char *argv[]) {
 
 
 
-### Qt Designer
+## Qt Designer
 
 - `notepad.ui`파일은 XML 포멧으로 작성하는 UI 정의 문서다.
 
@@ -75,7 +77,7 @@ int main(int argc, char *argv[]) {
 
 
 
-### UI Files
+## UI Files
 
 - `notepad.h`, `notepad.cpp`는 UI File이다.
 
@@ -133,7 +135,7 @@ Notepad::~Notepad() {
 
 
 
-### Connect UI Elements to Codes
+## Connect UI Elements to Codes
 
 ##### 메뉴추가
 
@@ -172,11 +174,93 @@ void Notepad::on_actionSave_triggered() {
 
 
 
+## Resources
+
+##### 
+
+##### qrc 파일 추가
+
+1. Qt Creator 화면 좌측 해당 프로젝트 우클릭
+2. `Add New...`
+3. `Qt`  > `Qt Resource File` (*.prc) 선택
+
+![](img\qt_qrc_adding.png)
+
+4. Choose...
+5. 파일명에 `resources` 입력
+   - 파일명이 `resources.qrc`로 생성된다. (파일명은 자유)
+6. 프로젝트 root 폴더 밑에 `resources` 폴더 생성 (폴더명 역시 자유) 및 폴더 선택 후 `Next`
+7. 아래 화면에서 내용 확인 후 `Finish`
+
+![](img\qt_qrc_adding_path.png)
 
 
 
 
 
+##### 
+
+##### Image File 추가
+
+1. `[ROOT]/resources/` 하위에 `img` 폴더 생성
+2. 프로젝트에서 사용할 이미지 파일을 복사해 넣는다.
+3. `Add New...` > `Add Existing Files...`
+4. 추가할 이미지를 선택한 후, `Open`
+5. 아래와 같이 폴더명과 함께 이미지 경로가 설정되어 추가된다.
+
+![](img\qt_qrc_adding_imgs.png)
+
+6. `Prefix`를 사용하면 한 폴더에 있는 이미지들을 추가로 구분할 수 있다.
+
+   - 개인적으로는 파일명에 직접 붙이는 것이 좋아서 사용하지 않았다.
+
+   
+
+##### QSS File 추가
+
+1. ` [ROOT]/resources/` 하위에 `qss` 폴더 생성
+2. `qss`폴더에 `style_default.qss` 파일 생성
+3. `Add Files` > `style_default.qss` 선택
+
+![](img\qt_qrc_adding_qss.png)
+
+4. `mainwindow.cpp`의 생성자에서 `qss`파일을 등록한다.
+
+```c++
+MainWindow::MainWindow(QWidget* parent)
+  : QMainWindow(parent)
+  , ui_(new Ui::MainWindow) {
+	...
+	// QSS install
+	QFile file(":/qss/style_default.qss");
+	file.open(QFile::ReadOnly);
+	qApp->setStyleSheet(QString::fromLatin1(file.readAll()));
+    ...
+}
+```
 
 
+
+
+
+##### 한글지원 처리
+
+##### 
+
+##### 
+
+- 한글명칭의 파일이나 경로를 읽고 UI에 반영할 때 한글이 깨지는 경우, 아래 코드를 `main.cpp`에서 호출한다.
+
+```C++
+void SetLanguage() {
+  std::locale::global ( std::locale("") );
+  QTranslator qtTranslator;
+  qtTranslator.load("qt_" + QLocale::system().name(),
+                    QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+  qApp->installTranslator(&qtTranslator);
+  QTranslator myappTranslator;
+  myappTranslator.load("myapp_" + QLocale::system().name());
+  qApp->installTranslator(&myappTranslator);
+}
+```
 
