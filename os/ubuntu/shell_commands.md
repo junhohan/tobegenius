@@ -34,7 +34,21 @@ $ sudo crontab -e
 /etc/cron.weekly/
 ```
 
+
+
+#### crontab 실행 로그 보기
+
+```bash
+$ tail /var/log/syslog <- 시스템로그
+$ grep CRON /var/log/syslog <- cron에 대한 시스템로그만 보기
+```
+
+
+
+
+
 ## 시간 동기화 (on Ubuntu)
+
 ```
 $ date && sudo ntpdate ntp.ubuntu.com && date
 ```
@@ -45,6 +59,8 @@ $ date && sudo ntpdate ntp.ubuntu.com && date
 ```
 
 [참고페이지](http://system-monitoring.readthedocs.io/en/latest/log.html)
+
+
 
 ## Service (on Ubuntu)
 
@@ -132,6 +148,8 @@ $ date && sudo ntpdate ntp.ubuntu.com && date
 
 [참고] restart 또는 stop을 실행할 때, "Unknown instance:" 라는 메시지가 출력되면 ***"앱이 실행되고 있지 않아서 stop할게 없어요!"*** 라는 의미다. start가 되지 않을 때는 `/var/init/my_app.conf` 파일에 문제가 있거나, 파일을 실행할 때 오류가 발생하거나 둘 중 하나다.
 
+
+
 #### Upstart 서비스 상태 조회
 
 ```Bash
@@ -145,7 +163,17 @@ $ date && sudo ntpdate ntp.ubuntu.com && date
 ```
 
 
+
+#### 사용중인 service 파일 위치
+
+```bash
+$ systemctl show ssh.service | grep Path
+```
+
+
+
 ## sed 명령어
+
 #### 모든 파일의 모든 문자열 Replace (on macOS)
 
 sed options  
@@ -162,6 +190,136 @@ sed options
   #!/bin/bash
   grep -rl --exclude-from=myshell.sh "OLD" | xargs sed -i "" -e 's/OLD/NEW/g'
 ```
+
+
+
+## wget
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Ubuntu change hostname command
+
+- hostname 파일을 열고 원하는 이름으로 수정한다.
+  `sudo vi /etc/hostname`
+
+- hosts 파일을 열고 새로운 이름이 들어간 내용이 있다면 모두 변경한다.
+  `sudo nano /etc/hosts`
+
+- 재부팅을 한다.
+  `sudo reboot`
+
+
+
+
+
+
+
+
+
+
+
+## Install Python by Specified Version
+
+
+
+```bash
+$ sudo apt-get install libssl-dev openssl
+$ sudo apt-get install zlib1g-dev
+$ wget https://www.python.org/ftp/python/3.5.4/Python-3.5.4.tgz
+$ tar xzvf Python-3.5.4.tgz
+$ cd Python-3.5.4
+$ ./configure
+$ make
+$ sudo make install
+```
+
+
+
+
+
+## Chanage Welcomde Message
+
+- 저장장치 사용량을 출력하는 스크립트 작성한다.
+- `/etc/update-motd.d` 디렉토리 안에 스크립트 문서를 저장한다.
+
+```bash
+$ sudo vi /etc/update-motd.d/99-dist-usage
+#!/bin/bash
+echo -e "\033[0;34m" "--------------------------------------------------------"
+echo -e "\033[0;34m" "-------               DISK Usage                 -------"
+echo -e "\033[0;34m" "--------------------------------------------------------"
+echo -e "\033[0;31m" " > DISK Remain : $(df -P | grep -v ^Filesystem | awk '{sum += $4} END { print sum/1024/1024 " GB" }')"
+echo -e "\033[0;33m" " > DISK Used   : $(df -P | grep -v ^Filesystem | awk '{sum += $3} END { print sum/1024/1024 " GB" }')"
+echo -e "\033[0;32m" " > DISK Total  : $(df -P | grep -v ^Filesystem | awk '{sum += $2} END { print sum/1024/1024 " GB" }')"
+echo -e "\033[0;34m" "--------------------------------------------------------"
+echo -e "\033[1;37m"
+
+```
+
+
+
+- 파일명 앞자리에 숫자의 순서대로 실행된다.
+
+```bash
+$ sudo ls /etc/update-motd.d/
+00-header     51-cloudguest  90-updates-available  97-overlayroot      99-dist-usage
+10-help-text  80-esm	     91-release-upgrade    98-fsck-at-reboot
+50-motd-news  80-livepatch   95-hwe-eol		   98-reboot-required
+```
+
+
+
+- 다시 로그인하면 아래 처럼 메시지가 출력된다.
+
+```bash
+...
+
+ --------------------------------------------------------
+ -------               DISK Usage                 -------
+ --------------------------------------------------------
+  > DISK Remain : 51.5426 GB
+  > DISK Used   : 10.0532 GB
+  > DISK Total  : 61.6115 GB
+ --------------------------------------------------------
+Last login: Fri Mar 13 09:29:07 2020 from 211.228.100.67
+$
+```
+
+
+
+## echo
+
+#### echo color
+
+```bash
+White  : echo -e "\033[1;37m"
+Black  : echo -e "\033[0;30m"
+BLlue  : echo -e "\033[0;34m"
+Green  : echo -e "\033[0;32m"
+Cyan   : echo -e "\033[0;36m"
+Red    : echo -e "\033[0;31m"
+Purple : echo -e "\033[0;35m"
+Yellow : echo -e "\033[0;33m"
+Gray   : echo -e "\033[1;30m"
+```
+
+
+
+
 
 
 
